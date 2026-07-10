@@ -170,10 +170,16 @@
         .qr-wrapper {
             position: relative;
             display: inline-block;
-            padding: 24px;
+            padding: 32px;
             background: var(--color-bg);
-            border-radius: var(--radius-md);
+            border-radius: var(--radius-lg);
             box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border-light);
+        }
+        .qr-hint {
+            margin-top: 12px;
+            font-size: 14px;
+            color: var(--color-text-muted);
         }
         .qr-watermark {
             position: absolute;
@@ -509,8 +515,8 @@
                     <div id="qrcode"></div>
                     <span class="qr-watermark">PlainQR</span>
                 </div>
-                <br>
-                <a href="#" class="btn btn-secondary download-btn" id="download-btn" download="plainqr-youtube.png">
+                <div class="qr-hint">📱 Point your camera and scan</div>
+                <a href="#" class="btn btn-primary download-btn" id="download-btn" download="plainqr-youtube.png">
                     Download PNG
                 </a>
             </div>
