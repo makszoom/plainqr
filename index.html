@@ -670,9 +670,9 @@
             updateCounterDisplay();
 
             setTimeout(() => {
-                const qrImg = qrContainer.querySelector('img');
-                if (qrImg) {
-                    document.getElementById('download-btn').href = qrImg.src;
+                const canvas = qrContainer.querySelector('canvas');
+                if (canvas) {
+                    document.getElementById('download-btn').href = canvas.toDataURL('image/png');
                 }
             }, 100);
         }
