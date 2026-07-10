@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlainQR — Simple QR Code Generator</title>
+    <meta name="description" content="Free QR code generator. No signup. No watermark. Generate clean QR codes instantly.">
+    
+    <!-- Geist Font (Vercel-style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <style>
+        /* Vercel Design System Tokens */
+        :root {
+            --color-bg: #ffffff;
+            --color-text: #171717;
+            --color-text-secondary: #4d4d4d;
+            --color-text-muted: #666666;
+            --color-border: rgba(0, 0, 0, 0.08);
+            --color-border-light: #ebebeb;
+            --color-accent: #171717;
+            --color-accent-hover: #000000;
+            --color-focus: hsla(212, 100%, 48%, 1);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-border: 0px 0px 0px 1px rgba(0, 0, 0, 0.08);
+            --shadow-card: rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.04) 0px 2px 2px, #fafafa 0px 0px 0px 1px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation */
+        nav {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            margin-left: 24px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 32px 60px;
+            max-width: 720px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 600;
+            line-height: 1.0;
+            letter-spacing: -2.4px;
+            color: var(--color-text);
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .hero .subtitle {
+            font-size: 16px;
+            color: var(--color-text-muted);
+            margin-bottom: 40px;
+        }
+
+        /* Generator Card */
+        .generator-card {
+            width: 100%;
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 32px;
+            background: var(--color-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .input-group {
+            margin-bottom: 16px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        input[type="url"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-family: 'Geist', system-ui, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-text);
+            background: var(--color-bg);
+            border: none;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-border);
+            outline: none;
+            transition: box-shadow 0.2s;
+        }
+
+        input[type="url"]::placeholder,
+        input[type="text"]::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        input[type="url"]:focus,
+        input[type="text"]:focus {
+            box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 0px 0px 3px rgba(147, 197, 253, 0.5);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-family: 'Geist', system-ui, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--color-accent);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .btn-primary:disabled {
+            background: var(--color-text-muted);
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--color-bg);
+            color: var(--color-text);
+            box-shadow: var(--shadow-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-border-light);
+        }
+
+        /* QR Result */
+        .qr-result {
+            margin-top: 32px;
+            text-align: center;
+            display: none;
+        }
+
+        .qr-result.visible {
+            display: block;
+        }
+
+        .qr-wrapper {
+            position: relative;
+            display: inline-block;
+            padding: 24px;
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card);
+        }
+
+        .qr-watermark {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .download-btn {
+            margin-top: 16px;
+        }
+
+        /* Counter */
+        .counter {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .counter span {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Paywall */
+        .paywall {
+            display: none;
+            text-align: center;
+            padding: 32px;
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+            border-radius: var(--radius-lg);
+            margin-top: 24px;
+        }
+
+        .paywall.visible {
+            display: block;
+        }
+
+        .paywall h3 {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.96px;
+            margin-bottom: 12px;
+        }
+
+        .paywall p {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .price-tag {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .price-note {
+            font-size: 14px;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 720px;
+            margin: 60px auto;
+            padding: 0 32px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.32px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 40px 32px;
+            text-align: center;
+            border-top: 1px solid var(--color-border-light);
+            width: 100%;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        footer a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+                letter-spacing: -1.8px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .generator-card {
+                margin: 0 16px;
+                padding: 24px;
+            }
+
+            nav {
+                padding: 16px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="logo">PlainQR</a>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>QR codes,<br>no&nbsp;watermark.</h1>
+        <p>Generate clean QR codes instantly.</p>
+        <p class="subtitle">No signup. No branding. Just QR.</p>
+    </section>
+
+    <!-- Generator -->
+    <div class="generator-card">
+        <div class="input-group">
+            <label for="url-input">Enter URL or text</label>
+            <input type="url" id="url-input" placeholder="https://example.com" autocomplete="off">
+        </div>
+        
+        <button class="btn btn-primary" id="generate-btn" onclick="generateQR()">
+            Generate QR Code
+        </button>
+
+        <div class="counter">
+            <span id="free-count">5</span> free generations remaining
+        </div>
+
+        <!-- QR Result -->
+        <div class="qr-result" id="qr-result">
+            <div class="qr-wrapper" id="qr-wrapper">
+                <div id="qrcode"></div>
+                <span class="qr-watermark">PlainQR</span>
+            </div>
+            <br>
+            <a href="#" class="btn btn-secondary download-btn" id="download-btn" download="plainqr-code.png">
+                Download PNG
+            </a>
+        </div>
+
+        <!-- Paywall -->
+        <div class="paywall" id="paywall">
+            <h3>Free limit reached</h3>
+            <p>You've used all 5 free QR codes. Upgrade for unlimited access.</p>
+            <div class="price-tag">$5</div>
+            <div class="price-note">Lifetime access. No subscription.</div>
+            <button class="btn btn-primary" onclick="window.open('https://nowpayments.io', '_blank')">
+                Upgrade with Crypto
+            </button>
+            <p style="margin-top: 12px; font-size: 12px; color: var(--color-text-muted);">
+                Powered by NOWPayments (USDT, BTC)
+            </p>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant</h3>
+            <p>Generate QR codes in milliseconds. No waiting, no queues.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <h3>Private</h3>
+            <p>All processing happens in your browser. We don't store your data.</p>
+        </div>
+        <div class="feature">
+            <div class="feature-icon">🎨</div>
+            <h3>Clean</h3>
+            <p>No ugly watermarks. Just a pure, scannable QR code.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>PlainQR — Simple QR Code Generator</p>
+    </footer>
+
+    <script>
+        // Free generation counter (localStorage)
+        const FREE_LIMIT = 5;
+        const COUNTER_KEY = 'plainqr_free_count';
+
+        function getRemainingCount() {
+            const used = parseInt(localStorage.getItem(COUNTER_KEY) || '0');
+            return Math.max(0, FREE_LIMIT - used);
+        }
+
+        function incrementCounter() {
+            const used = parseInt(localStorage.getItem(COUNTER_KEY) || '0');
+            localStorage.setItem(COUNTER_KEY, (used + 1).toString());
+            return FREE_LIMIT - used - 1;
+        }
+
+        function updateCounterDisplay() {
+            const remaining = getRemainingCount();
+            document.getElementById('free-count').textContent = remaining;
+            
+            if (remaining <= 0) {
+                document.getElementById('generate-btn').disabled = true;
+                document.getElementById('generate-btn').textContent = 'Free limit reached';
+            }
+        }
+
+        // Generate QR Code
+        function generateQR() {
+            const remaining = getRemainingCount();
+            
+            if (remaining <= 0) {
+                document.getElementById('qr-result').classList.remove('visible');
+                document.getElementById('paywall').classList.add('visible');
+                return;
+            }
+
+            const url = document.getElementById('url-input').value.trim();
+            
+            if (!url) {
+                document.getElementById('url-input').focus();
+                return;
+            }
+
+            // Clear previous
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = '';
+
+            // Generate new QR
+            const qr = new QRCode(qrContainer, {
+                text: url,
+                width: 256,
+                height: 256,
+                colorDark: '#171717',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.M
+            });
+
+            // Show result
+            document.getElementById('qr-result').classList.add('visible');
+            document.getElementById('paywall').classList.remove('visible');
+
+            // Increment counter
+            incrementCounter();
+            updateCounterDisplay();
+
+            // Setup download (after QR renders)
+            setTimeout(() => {
+                const qrImg = qrContainer.querySelector('img');
+                if (qrImg) {
+                    document.getElementById('download-btn').href = qrImg.src;
+                }
+            }, 100);
+        }
+
+        // Allow Enter key
+        document.getElementById('url-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateQR();
+            }
+        });
+
+        // Init
+        updateCounterDisplay();
+    </script>
+
+</body>
+</html>
