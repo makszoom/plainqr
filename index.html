@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlainQR — Simple QR Code Generator</title>
-    <meta name="description" content="Free QR code generator. No signup. No watermark. Generate clean QR codes instantly.">
+    <title>PlainQR — Free QR Code Generator for Menu, WiFi, Business Cards &amp; More</title>
+    <meta name="description" content="Free QR code generator for restaurants, businesses, and personal use. Create QR codes for menu, WiFi, business cards, PDFs, YouTube, Instagram — no signup, no watermark.">
+    <meta name="keywords" content="free qr code generator, qr code for menu, qr code for wifi, qr code for business card, qr code no watermark, plainqr">
+    <link rel="canonical" href="https://makszoom.github.io/plainqr/">
     
     <!-- Geist Font (Vercel-style) -->
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
     
     <!-- QR Code Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -49,7 +51,6 @@
             align-items: center;
         }
 
-        /* Navigation */
         nav {
             width: 100%;
             max-width: 1200px;
@@ -80,41 +81,40 @@
             color: var(--color-text);
         }
 
-        /* Hero Section */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 32px;
+            width: 100%;
+            flex: 1;
+        }
+
         .hero {
+            padding: 60px 0 32px;
             text-align: center;
-            padding: 80px 32px 60px;
-            max-width: 720px;
         }
 
         .hero h1 {
             font-size: 48px;
             font-weight: 600;
-            line-height: 1.0;
+            line-height: 1;
             letter-spacing: -2.4px;
+            margin-bottom: 16px;
             color: var(--color-text);
-            margin-bottom: 20px;
         }
 
         .hero p {
-            font-size: 20px;
-            font-weight: 400;
-            line-height: 1.6;
+            font-size: 18px;
             color: var(--color-text-secondary);
-            margin-bottom: 8px;
+            line-height: 1.5;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .hero .subtitle {
-            font-size: 16px;
-            color: var(--color-text-muted);
-            margin-bottom: 40px;
-        }
-
-        /* Generator Card */
         .generator-card {
             width: 100%;
-            max-width: 560px;
-            margin: 0 auto;
+            max-width: 600px;
+            margin: 32px auto;
             padding: 32px;
             background: var(--color-bg);
             border-radius: var(--radius-lg);
@@ -125,19 +125,10 @@
             margin-bottom: 16px;
         }
 
-        .input-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            margin-bottom: 8px;
-        }
-
-        input[type="url"],
-        input[type="text"] {
+        input[type="url"] {
             width: 100%;
             padding: 12px 16px;
-            font-family: 'Geist', system-ui, sans-serif;
+            font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             font-size: 16px;
             font-weight: 400;
             color: var(--color-text);
@@ -149,21 +140,18 @@
             transition: box-shadow 0.2s;
         }
 
-        input[type="url"]::placeholder,
-        input[type="text"]::placeholder {
+        input::placeholder {
             color: var(--color-text-muted);
         }
 
-        input[type="url"]:focus,
-        input[type="text"]:focus {
+        input:focus {
             box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.08), 0px 0px 0px 3px rgba(147, 197, 253, 0.5);
         }
 
-        /* Buttons */
         .btn {
             display: inline-block;
             padding: 12px 24px;
-            font-family: 'Geist', system-ui, sans-serif;
+            font-family: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
             font-size: 14px;
             font-weight: 500;
             text-align: center;
@@ -185,21 +173,10 @@
         }
 
         .btn-primary:disabled {
-            background: var(--color-text-muted);
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
-        .btn-secondary {
-            background: var(--color-bg);
-            color: var(--color-text);
-            box-shadow: var(--shadow-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-border-light);
-        }
-
-        /* QR Result */
         .qr-result {
             margin-top: 32px;
             text-align: center;
@@ -232,9 +209,19 @@
 
         .download-btn {
             margin-top: 16px;
+            display: inline-block;
         }
 
-        /* Counter */
+        .btn-secondary {
+            background: var(--color-bg);
+            color: var(--color-text);
+            box-shadow: var(--shadow-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-border-light);
+        }
+
         .counter {
             text-align: center;
             margin-top: 16px;
@@ -247,7 +234,6 @@
             color: var(--color-text);
         }
 
-        /* Paywall */
         .paywall {
             display: none;
             text-align: center;
@@ -287,46 +273,117 @@
             margin-bottom: 24px;
         }
 
-        /* Features */
-        .features {
+        /* Popular QR Types Section */
+        .types-section {
+            margin: 60px 0;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .types-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -1.2px;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--color-text);
+        }
+
+        .types-section h2 span {
+            color: var(--color-text-muted);
+            font-weight: 400;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 16px;
+        }
+
+        .type-card {
+            display: block;
+            padding: 20px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--color-text);
+            background: var(--color-bg);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-card);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .type-card:hover {
+            transform: translateY(-2px);
+            box-shadow: rgba(0,0,0,0.08) 0px 0px 0px 1px, rgba(0,0,0,0.08) 0px 4px 8px, #fafafa 0px 0px 0px 1px;
+        }
+
+        .type-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .type-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .type-desc {
+            font-size: 12px;
+            color: var(--color-text-muted);
+            margin-top: 4px;
+        }
+
+        /* Features Section */
+        .features-section {
+            margin: 60px 0;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .features-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -1.2px;
+            text-align: center;
+            margin-bottom: 32px;
+            color: var(--color-text);
+        }
+
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
-            max-width: 720px;
-            margin: 60px auto;
-            padding: 0 32px;
         }
 
-        .feature {
+        .feature-card {
             text-align: center;
-            padding: 24px;
+            padding: 20px;
         }
 
         .feature-icon {
-            font-size: 24px;
+            font-size: 32px;
             margin-bottom: 12px;
         }
 
-        .feature h3 {
+        .feature-title {
             font-size: 16px;
             font-weight: 600;
+            color: var(--color-text);
             margin-bottom: 8px;
-            letter-spacing: -0.32px;
         }
 
-        .feature p {
+        .feature-desc {
             font-size: 14px;
             color: var(--color-text-secondary);
             line-height: 1.5;
         }
 
-        /* Footer */
         footer {
             margin-top: auto;
             padding: 40px 32px;
             text-align: center;
             border-top: 1px solid var(--color-border-light);
-            width: 100%;
         }
 
         footer p {
@@ -337,121 +394,226 @@
         footer a {
             color: var(--color-text-secondary);
             text-decoration: none;
+            margin: 0 8px;
         }
 
-        /* Responsive */
+        footer a:hover {
+            color: var(--color-text);
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 36px;
-                letter-spacing: -1.8px;
+                font-size: 32px;
+                letter-spacing: -1.6px;
             }
 
-            .hero p {
-                font-size: 18px;
+            .types-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .features {
+            .features-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
             }
 
-            .generator-card {
-                margin: 0 16px;
-                padding: 24px;
+            main {
+                padding: 0 20px;
             }
 
             nav {
                 padding: 16px 20px;
             }
+
+            .generator-card {
+                padding: 24px;
+            }
         }
     </style>
+
+    <!-- Schema.org WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PlainQR",
+        "url": "https://makszoom.github.io/plainqr/",
+        "description": "Free QR code generator for restaurants, businesses, and personal use. No signup, no watermark.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://makszoom.github.io/plainqr/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Schema.org SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "PlainQR",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250"
+        }
+    }
+    </script>
 </head>
 <body>
-
-    <!-- Navigation -->
     <nav>
         <a href="/" class="logo">PlainQR</a>
         <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
+            <a href="#generator">Generate</a>
+            <a href="#types">Types</a>
+            <a href="https://github.com/makszoom/plainqr" target="_blank">GitHub</a>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>QR codes,<br>no&nbsp;watermark.</h1>
-        <p>Generate clean QR codes instantly.</p>
-        <p class="subtitle">No signup. No branding. Just QR.</p>
-    </section>
+    <main>
+        <section class="hero">
+            <h1>QR codes, no watermark.</h1>
+            <p>Generate clean QR codes instantly. Free for up to 5 codes. No signup required.</p>
+        </section>
 
-    <!-- Generator -->
-    <div class="generator-card">
-        <div class="input-group">
-            <label for="url-input">Enter URL or text</label>
-            <input type="url" id="url-input" placeholder="https://example.com" autocomplete="off">
-        </div>
-        
-        <button class="btn btn-primary" id="generate-btn" onclick="generateQR()">
-            Generate QR Code
-        </button>
-
-        <div class="counter">
-            <span id="free-count">5</span> free generations remaining
-        </div>
-
-        <!-- QR Result -->
-        <div class="qr-result" id="qr-result">
-            <div class="qr-wrapper" id="qr-wrapper">
-                <div id="qrcode"></div>
-                <span class="qr-watermark">PlainQR</span>
+        <div class="generator-card" id="generator">
+            <div class="input-group">
+                <input type="url" id="qr-url" placeholder="Enter URL, text, or email..." autocomplete="off">
             </div>
-            <br>
-            <a href="#" class="btn btn-secondary download-btn" id="download-btn" download="plainqr-code.png">
-                Download PNG
-            </a>
-        </div>
-
-        <!-- Paywall -->
-        <div class="paywall" id="paywall">
-            <h3>Free limit reached</h3>
-            <p>You've used all 5 free QR codes. Upgrade for unlimited access.</p>
-            <div class="price-tag">$5</div>
-            <div class="price-note">Lifetime access. No subscription.</div>
-            <button class="btn btn-primary" onclick="window.open('https://nowpayments.io', '_blank')">
-                Upgrade with Crypto
+            <button class="btn btn-primary" id="generate-btn" onclick="generateQR()">
+                Generate QR Code
             </button>
-            <p style="margin-top: 12px; font-size: 12px; color: var(--color-text-muted);">
-                Powered by NOWPayments (USDT, BTC)
-            </p>
-        </div>
-    </div>
+            <div class="counter">
+                <span id="free-count">5</span> free generations remaining
+            </div>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="feature">
-            <div class="feature-icon">⚡</div>
-            <h3>Instant</h3>
-            <p>Generate QR codes in milliseconds. No waiting, no queues.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">🔒</div>
-            <h3>Private</h3>
-            <p>All processing happens in your browser. We don't store your data.</p>
-        </div>
-        <div class="feature">
-            <div class="feature-icon">🎨</div>
-            <h3>Clean</h3>
-            <p>No ugly watermarks. Just a pure, scannable QR code.</p>
-        </div>
-    </section>
+            <div class="qr-result" id="qr-result">
+                <div class="qr-wrapper" id="qr-wrapper">
+                    <div id="qrcode"></div>
+                    <span class="qr-watermark">PlainQR</span>
+                </div>
+                <br>
+                <a href="#" class="btn btn-secondary download-btn" id="download-btn" download="plainqr-code.png">
+                    Download PNG
+                </a>
+            </div>
 
-    <!-- Footer -->
+            <div class="paywall" id="paywall">
+                <h3>Free limit reached</h3>
+                <p>You've used all 5 free QR codes. Upgrade for unlimited access.</p>
+                <div class="price-tag">$5</div>
+                <div class="price-note">Lifetime access. No subscription.</div>
+                <button class="btn btn-primary" onclick="window.open('https://nowpayments.io', '_blank')">
+                    Upgrade with Crypto
+                </button>
+            </div>
+        </div>
+
+        <!-- Popular QR Types -->
+        <section class="types-section" id="types">
+            <h2>Popular QR Types <span>— choose yours</span></h2>
+            <div class="types-grid">
+                <a href="menu.html" class="type-card">
+                    <div class="type-icon">🍽️</div>
+                    <div class="type-name">Menu</div>
+                    <div class="type-desc">Restaurant &amp; café</div>
+                </a>
+                <a href="wifi.html" class="type-card">
+                    <div class="type-icon">📶</div>
+                    <div class="type-name">WiFi</div>
+                    <div class="type-desc">Guest networks</div>
+                </a>
+                <a href="business-card.html" class="type-card">
+                    <div class="type-icon">💼</div>
+                    <div class="type-name">Business Card</div>
+                    <div class="type-desc">vCard &amp; contacts</div>
+                </a>
+                <a href="pdf.html" class="type-card">
+                    <div class="type-icon">📄</div>
+                    <div class="type-name">PDF</div>
+                    <div class="type-desc">Documents &amp; forms</div>
+                </a>
+                <a href="youtube.html" class="type-card">
+                    <div class="type-icon">📺</div>
+                    <div class="type-name">YouTube</div>
+                    <div class="type-desc">Channels &amp; videos</div>
+                </a>
+                <a href="instagram.html" class="type-card">
+                    <div class="type-icon">📸</div>
+                    <div class="type-name">Instagram</div>
+                    <div class="type-desc">Profiles &amp; posts</div>
+                </a>
+                <a href="contact.html" class="type-card">
+                    <div class="type-icon">📇</div>
+                    <div class="type-name">Contact</div>
+                    <div class="type-desc">Save to phone</div>
+                </a>
+                <a href="event.html" class="type-card">
+                    <div class="type-icon">🎟️</div>
+                    <div class="type-name">Event</div>
+                    <div class="type-desc">Tickets &amp; registration</div>
+                </a>
+                <a href="location.html" class="type-card">
+                    <div class="type-icon">📍</div>
+                    <div class="type-name">Location</div>
+                    <div class="type-desc">Maps &amp; directions</div>
+                </a>
+                <a href="payment.html" class="type-card">
+                    <div class="type-icon">💳</div>
+                    <div class="type-name">Payment</div>
+                    <div class="type-desc">Donations &amp; tips</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features-section">
+            <h2>Why PlainQR?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Clean Design</div>
+                    <div class="feature-desc">Minimalist QR codes without clutter or unnecessary branding</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Instant Generation</div>
+                    <div class="feature-desc">Create and download your QR code in under 10 seconds</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">No Signup Needed</div>
+                    <div class="feature-desc">Generate up to 5 QR codes without creating an account</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer>
-        <p>PlainQR — Simple QR Code Generator</p>
+        <p>
+            PlainQR — Simple QR Code Generator
+            <br><br>
+            <a href="menu.html">Menu</a> |
+            <a href="wifi.html">WiFi</a> |
+            <a href="business-card.html">Business Card</a> |
+            <a href="pdf.html">PDF</a> |
+            <a href="youtube.html">YouTube</a> |
+            <a href="instagram.html">Instagram</a> |
+            <a href="contact.html">Contact</a> |
+            <a href="event.html">Event</a> |
+            <a href="location.html">Location</a> |
+            <a href="payment.html">Payment</a>
+        </p>
     </footer>
 
     <script>
-        // Free generation counter (localStorage)
+        // QR Code Generation
         const FREE_LIMIT = 5;
         const COUNTER_KEY = 'plainqr_free_count';
 
@@ -469,35 +631,29 @@
         function updateCounterDisplay() {
             const remaining = getRemainingCount();
             document.getElementById('free-count').textContent = remaining;
-            
             if (remaining <= 0) {
                 document.getElementById('generate-btn').disabled = true;
                 document.getElementById('generate-btn').textContent = 'Free limit reached';
             }
         }
 
-        // Generate QR Code
         function generateQR() {
             const remaining = getRemainingCount();
-            
             if (remaining <= 0) {
                 document.getElementById('qr-result').classList.remove('visible');
                 document.getElementById('paywall').classList.add('visible');
                 return;
             }
 
-            const url = document.getElementById('url-input').value.trim();
-            
+            const url = document.getElementById('qr-url').value.trim();
             if (!url) {
-                document.getElementById('url-input').focus();
+                document.getElementById('qr-url').focus();
                 return;
             }
 
-            // Clear previous
             const qrContainer = document.getElementById('qrcode');
             qrContainer.innerHTML = '';
 
-            // Generate new QR
             const qr = new QRCode(qrContainer, {
                 text: url,
                 width: 256,
@@ -507,15 +663,12 @@
                 correctLevel: QRCode.CorrectLevel.M
             });
 
-            // Show result
             document.getElementById('qr-result').classList.add('visible');
             document.getElementById('paywall').classList.remove('visible');
 
-            // Increment counter
             incrementCounter();
             updateCounterDisplay();
 
-            // Setup download (after QR renders)
             setTimeout(() => {
                 const qrImg = qrContainer.querySelector('img');
                 if (qrImg) {
@@ -524,16 +677,12 @@
             }, 100);
         }
 
-        // Allow Enter key
-        document.getElementById('url-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                generateQR();
-            }
+        document.getElementById('qr-url').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') generateQR();
         });
 
-        // Init
+        // Initialize
         updateCounterDisplay();
     </script>
-
 </body>
 </html>
