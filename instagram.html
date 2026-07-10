@@ -673,9 +673,19 @@
             incrementCounter();
             updateCounterDisplay();
             setTimeout(() => {
-                const canvas = qrContainer.querySelector('canvas');
-                if (canvas) {
-                    document.getElementById('download-btn').href = canvas.toDataURL('image/png');
+                const oldCanvas = qrContainer.querySelector('canvas');
+                if (oldCanvas) {
+                    const padding = 32;
+                    const newCanvas = document.createElement('canvas');
+                    newCanvas.width = oldCanvas.width + padding * 2;
+                    newCanvas.height = oldCanvas.height + padding * 2;
+                    
+                    const ctx = newCanvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, newCanvas.width, newCanvas.height);
+                    ctx.drawImage(oldCanvas, padding, padding);
+                    
+                    document.getElementById('download-btn').href = newCanvas.toDataURL('image/png');
                 }
             }, 100);
         }
