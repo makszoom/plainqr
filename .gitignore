@@ -1,0 +1,15 @@
+# Ignore OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
+
+# Ignore large media
+*.mp4
+*.mov
+*.avi
+*.zip
+*.exe
+*.msi
