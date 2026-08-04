@@ -13,3 +13,7 @@ Thumbs.db
 *.zip
 *.exe
 *.msi
+
+# Ignore backups and helper scripts
+backup-*/
+upgrade-landings.py
