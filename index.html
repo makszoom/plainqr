@@ -609,6 +609,29 @@
             line-height: 1.5;
         }
 
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+        .faq-answer {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
         footer {
             margin-top: auto;
             padding: 40px 32px;
@@ -768,6 +791,56 @@
         }
     }
     </script>
+
+    <!-- Schema.org FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What QR code types can I generate?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "PlainQR supports 12 types: URL, WiFi, vCard (business card), email, phone, SMS, event, location, payment, PDF, Instagram, and YouTube. Each type has a dedicated generator."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are the QR codes free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. You get 5 free QR code generations with full functionality — no registration, no watermark. For unlimited access, a one-time payment of $3 gives you lifetime use."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I brand my QR codes with a logo?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. PlainQR lets you upload your logo and add it to the center of the QR code, choose dot styles, apply gradients, and adjust colors — perfect for business branding."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do my QR codes expire?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Static QR codes never expire. They encode your data directly and work forever, with no subscription or ongoing cost."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data safe when generating QR codes?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Absolutely. All QR codes are generated in your browser using JavaScript. Your data never leaves your device — there are no uploads to any server."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
     <nav>
@@ -775,7 +848,7 @@
         <div class="nav-links">
             <a href="#generator">Generate</a>
             <a href="#types">Types</a>
-            <a href="https://github.com/makszoom/plainqr" target="_blank">GitHub</a>
+            <a href="#faq">FAQ</a>
         </div>
     </nav>
 
@@ -987,6 +1060,33 @@
                     <div class="feature-icon">🔒</div>
                     <div class="feature-title">No Signup Needed</div>
                     <div class="feature-desc">Generate up to 5 QR codes without creating an account</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="features-section" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-list" style="max-width:680px;margin:0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">What QR code types can I generate?</div>
+                    <div class="faq-answer">PlainQR supports 12 types: URL, WiFi, vCard (business card), email, phone, SMS, event, location, payment, PDF, Instagram, and YouTube. Each type has a dedicated generator.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are the QR codes free?</div>
+                    <div class="faq-answer">Yes. You get 5 free QR code generations with full functionality — no registration, no watermark. For unlimited access, a one-time payment of $3 gives you lifetime use.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I brand my QR codes with a logo?</div>
+                    <div class="faq-answer">Yes. PlainQR lets you upload your logo and add it to the center of the QR code, choose dot styles (square, rounded, dots), apply gradients, and adjust colors — perfect for business branding.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do my QR codes expire?</div>
+                    <div class="faq-answer">No. Static QR codes never expire. They encode your data directly and work forever, with no subscription or ongoing cost.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is my data safe when generating QR codes?</div>
+                    <div class="faq-answer">Absolutely. All QR codes are generated in your browser using JavaScript. Your data never leaves your device — there are no uploads to any server.</div>
                 </div>
             </div>
         </section>
